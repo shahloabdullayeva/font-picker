@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>FontSwap</h1>
+    <select id="lang" aria-label="Language"></select>
+  </header>
+
+  <label class="switch">
+    <input type="checkbox" id="enabled">
+    <span data-t="enabled"></span>
+  </label>
+
+  <div class="field">
+    <label for="scope" data-t="applyTo"></label>
+    <select id="scope">
+      <option value="all"></option>
+      <option value="site"></option>
+    </select>
+  </div>
+  <p class="note" id="scopeNote"></p>
+
+  <div class="field">
+    <label for="preset" data-t="fontSet"></label>
+    <select id="preset">
+      <option value="system"></option>
+      <option value="reading"></option>
+      <option value="modern"></option>
+      <option value="clear"></option>
+      <option value="custom"></option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="f-text" data-t="f_text"></label>
+    <input id="f-text" list="fontlist" autocomplete="off" spellcheck="false">
+  </div>
+  <p class="warn" id="w-text" hidden></p>
+
+  <div class="field">
+    <label for="f-headings" data-t="f_headings"></label>
+    <input id="f-headings" list="fontlist" autocomplete="off" spellcheck="false">
+  </div>
+  <p class="warn" id="w-headings" hidden></p>
+
+  <div class="field">
+    <label for="f-code" data-t="f_code"></label>
+    <input id="f-code" list="fontlist" autocomplete="off" spellcheck="false">
+  </div>
+  <p class="warn" id="w-code" hidden></p>
+
+  <datalist id="fontlist"></datalist>
+  <p class="note" data-t="hint"></p>
+
+  <p id="preview"></p>
+
+  <footer>
+    <label class="switch small">
+      <input type="checkbox" id="offHere">
+      <span data-t="offHere"></span>
+    </label>
+    <button id="reset" data-t="reset"></button>
+  </footer>
+
+  <script src="settings.js"></script>
+  <script src="i18n.js"></script>
+  <script src="fonts.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
