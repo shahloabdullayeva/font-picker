@@ -39,7 +39,7 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "fontswap@shahlo.blog",
+      "id": "font-picker@shahlo.blog",
       "strict_min_version": "115.0"
     }
   }

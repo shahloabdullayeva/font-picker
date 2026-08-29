@@ -1,4 +1,4 @@
-# FontSwap
+# Font Picker
 
 A browser extension that redraws any website in a font you choose. Set your
 defaults once; override them for a single site when that site's own font is
@@ -36,7 +36,7 @@ Two things surprise people coming from ordinary web work:
   kept in a variable between events. This extension needs no background script
   at all: the content script reads storage itself.
 - **Permissions are the whole review**. Ask for less and the extension installs
-  with a milder warning and gets reviewed faster. FontSwap asks for `storage`
+  with a milder warning and gets reviewed faster. Font Picker asks for `storage`
   and `activeTab` — a content script declared with `matches` does not need
   `host_permissions` on top.
 
@@ -55,7 +55,7 @@ Chrome and Edge log a harmless warning about the `browser_specific_settings`
 key — that key is Firefox's, and they ignore it. The extension still loads.
 
 Firefox keeps site access opt-in for Manifest V3. If nothing changes there,
-open the extensions menu → **FontSwap** → allow it on all sites. A permanent
+open the extensions menu → **Font Picker** → allow it on all sites. A permanent
 Firefox install needs the add-on signed at addons.mozilla.org; the `gecko.id`
 in the manifest is what identifies it there.
 
@@ -122,7 +122,7 @@ would lose to it on specificity.
 
 ## Publishing
 
-`./package.py` writes `fontswap-<version>.zip` with the manifest at the root,
+`./package.py` writes `font-picker-<version>.zip` with the manifest at the root,
 which is the shape all three stores expect.
 
 - Chrome Web Store — one-time developer fee, review in days.

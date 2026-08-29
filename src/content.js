@@ -5,7 +5,7 @@
    rewritten whenever the settings change -- no page reload needed.
 */
 (() => {
-  const STYLE_ID = 'fontswap-style';
+  const STYLE_ID = 'font-picker-style';
 
   /* Elements that must keep the site's own font. Icon fonts draw their glyphs
      from private code points, so forcing a text font onto them turns every

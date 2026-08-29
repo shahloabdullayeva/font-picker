@@ -5,7 +5,7 @@ Stores want the manifest at the top level of the archive, not inside a folder,
 which is why this zips the contents rather than the directory. Development
 files are left out.
 
-    ./package.py            -> fontswap-<version>.zip
+    ./package.py            -> font-picker-<version>.zip
 """
 import json
 import os
@@ -13,10 +13,10 @@ import zipfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SKIP_DIRS = {'test', '.git', '__pycache__'}
-SKIP_FILES = {'package.py', 'README.md', '.DS_Store'}
+SKIP_FILES = {'package.py', 'README.md', '.DS_Store', '.gitignore'}
 
 version = json.load(open(os.path.join(ROOT, 'manifest.json')))['version']
-out = os.path.join(ROOT, f'fontswap-{version}.zip')
+out = os.path.join(ROOT, f'font-picker-{version}.zip')
 
 with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
     for dirpath, dirnames, filenames in os.walk(ROOT):
