@@ -8,22 +8,14 @@ Edge and Firefox. Panel in English, Tajik and Uzbek.
 
 ## Why this exists
 
-The IT team where I work built us a CRM called Mytrion. Customer service lives
-in it eight hours a day. It was written with Claude from start to finish, and as
-far as I can tell nobody ever looked at what came back — which shows, mostly in
-how it looks.
+The IT team where I work built us a CRM called Mytrion and they told us to use it everyday because they want to avoid paying Zoho CRM 500k every year. It was written with Claude from start to finish and as
+far as I can tell nobody ever looked at what came back which shows, mostly in
+how it looks and how it works, they do take the comments and fix it quicky but it's visible it has no human interaction that much. This is not a complaint about building with AI. I almost certainly use it more
+than they do. I cannot code and every project under this account is AI written,
+this extension included. The difference is thatcare how it looks to the person who has to sit in front of it (which is only me obviously,lol).
 
-This is not a complaint about building with AI. I almost certainly use it more
-than they do. I cannot code. Every project under this account is AI-written,
-this extension included. The difference is that I read what it hands me, and I
-care how it looks to the person who has to sit in front of it.
-
-So I asked for one thing: change the font. They said they could make it bigger
-if I wanted, and laughed.
-
-A font is not something I need permission for. This changes the font on any
-website — Mytrion included.
-
+So I asked for one thing, to change the font. They said no and they could make it bigger
+if I wanted and laughed. So this extension is going to override whatever is their fancy font put out there :) Below is Claude's extension how it's gonna work:
 ## Install
 
 It is not in the Chrome Web Store or on addons.mozilla.org yet, so it goes in by
