@@ -6,6 +6,24 @@ unreadable. English, Tajik and Uzbek.
 
 Works in Chrome, Edge and Firefox from the same folder.
 
+## Why this exists
+
+The IT team where I work built us a CRM called Mytrion. Customer service lives
+in it eight hours a day. It was written with Claude from start to finish, and as
+far as I can tell nobody ever looked at what came back — which shows, mostly in
+how it looks.
+
+This is not a complaint about building with AI. I almost certainly use it more
+than they do. I cannot code. Every project under this account is AI-written,
+this extension included. The difference is that I read what it hands me, and I
+care how it looks to the person who has to sit in front of it.
+
+So I asked for one thing: change the font. They said they could make it bigger
+if I wanted, and laughed.
+
+A font is not something I need permission for. This changes the font on any
+website — Mytrion included.
+
 ---
 
 ## How a browser extension is put together
