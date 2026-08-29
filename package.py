@@ -4,7 +4,7 @@ import os
 import zipfile
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-SKIP_DIRS = {'test', '.git', '__pycache__'}
+SKIP_DIRS = {'test', 'store', '.git', '__pycache__'}
 SKIP_FILES = {'package.py', 'README.md', '.DS_Store', '.gitignore'}
 
 version = json.load(open(os.path.join(ROOT, 'manifest.json')))['version']
