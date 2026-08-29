@@ -1,10 +1,10 @@
 # Font Picker
 
-A browser extension that redraws any website in a font you choose. Set your
-defaults once; override them for a single site when that site's own font is
-unreadable. English, Tajik and Uzbek.
+Change the font on any website. Pick your fonts once and every page you open
+uses them, or set different fonts for one site that needs it. Works in Chrome,
+Edge and Firefox. Panel in English, Tajik and Uzbek.
 
-Works in Chrome, Edge and Firefox from the same folder.
+**[⬇ Download Font Picker](https://github.com/shahloabdullayeva/font-picker/archive/refs/heads/main.zip)** — then follow [Install](#install) below.
 
 ## Why this exists
 
@@ -24,89 +24,90 @@ if I wanted, and laughed.
 A font is not something I need permission for. This changes the font on any
 website — Mytrion included.
 
----
+## Install
 
-## How a browser extension is put together
+It is not in the Chrome Web Store or on addons.mozilla.org yet, so it goes in by
+hand. About a minute, and nothing needs to be built or compiled.
 
-An extension is a folder of ordinary web files plus one JSON file that tells the
-browser what they are for. There is no build step, no framework and no compiler
-— the browser loads the folder as it is. Five pieces do all the work:
+**1. Download and unzip**
 
-| Piece | What it is | Here |
+[Download the extension](https://github.com/shahloabdullayeva/font-picker/archive/refs/heads/main.zip)
+and unzip it. You get a folder named `font-picker-main`. Put it somewhere you
+will not tidy away — your browser loads the extension from that folder every
+time it starts, so deleting or moving the folder removes the extension.
+
+**2. Add it to your browser**
+
+Browsers do not allow a page to link to their settings, so copy the address into
+the address bar yourself.
+
+| Chrome | Edge | Firefox |
 |---|---|---|
-| **manifest.json** | The only required file. Declares the name, version, permissions, and which script goes where. | `manifest.json` |
-| **Content script** | JavaScript the browser injects *into web pages*. It sees the page's DOM but not the page's own JavaScript variables. This is the only piece that can touch a site. | `src/content.js` |
-| **Popup** | A small HTML page shown when the toolbar button is clicked. A normal page: HTML, CSS, JS. It cannot touch the page directly — it saves settings, and the content script reacts. | `src/popup.*` |
-| **Storage** | `storage.sync` follows the browser profile between machines, `storage.local` stays put. Both fire a `storage.onChanged` event, which is how the popup and the content script talk to each other. | `src/settings.js` |
-| **`_locales/`** | One `messages.json` per language. The browser picks the folder matching its own UI language for the extension's name and description. | `_locales/*/` |
+| Go to `chrome://extensions` | Go to `edge://extensions` | Go to `about:debugging#/runtime/this-firefox` |
+| Turn on **Developer mode**, top right | Turn on **Developer mode**, bottom left | — |
+| **Load unpacked** → pick the `font-picker-main` folder | **Load unpacked** → pick the `font-picker-main` folder | **Load Temporary Add-on** → pick `manifest.json` inside the folder |
+| Stays after a restart | Stays after a restart | Gone when Firefox closes — load it again, or see the note below |
 
-No browser ships a Tajik or Uzbek interface, so `_locales` alone would show
-both readers an English panel. That is why the popup carries its own
-translations and its own language picker, and `_locales` only supplies the name
-and description in the extensions list. If some Chrome build ever refuses the
-`_locales/tg` or `_locales/uz` folder, deleting it costs nothing but that line
-in the extensions list — the panel keeps all three languages.
+**3. Pin the button**
 
-Two things surprise people coming from ordinary web work:
+Click the puzzle-piece icon in the toolbar and pin Font Picker, so its button is
+always there.
 
-- **Manifest V3** is what stores accept now. The old background page became a
-  service worker that the browser stops whenever it is idle, so nothing may be
-  kept in a variable between events. This extension needs no background script
-  at all: the content script reads storage itself.
-- **Permissions are the whole review**. Ask for less and the extension installs
-  with a milder warning and gets reviewed faster. Font Picker asks for `storage`
-  and `activeTab` — a content script declared with `matches` does not need
-  `host_permissions` on top.
+Chrome and Edge print a small warning about a `browser_specific_settings` key.
+That key is Firefox's and they ignore it — the extension is fine.
 
-### Loading it while you work on it
-
-| Browser | Steps | Survives a restart? |
-|---|---|---|
-| **Chrome** | `chrome://extensions` → Developer mode → **Load unpacked** → pick this folder | yes |
-| **Edge** | `edge://extensions` → Developer mode → **Load unpacked** | yes |
-| **Firefox** | `about:debugging#/runtime/this-firefox` → **Load Temporary Add-on** → pick `manifest.json` | no — reload it each session |
-
-After editing a file, press the reload arrow on the extension's card, then
-reload the web page you are testing.
-
-Chrome and Edge log a harmless warning about the `browser_specific_settings`
-key — that key is Firefox's, and they ignore it. The extension still loads.
-
-Firefox keeps site access opt-in for Manifest V3. If nothing changes there,
-open the extensions menu → **Font Picker** → allow it on all sites. A permanent
-Firefox install needs the add-on signed at addons.mozilla.org; the `gecko.id`
-in the manifest is what identifies it there.
-
----
+Firefox extras: it keeps site access opt-in, so if nothing changes on a page,
+open the extensions menu → **Font Picker** → allow it on all sites. For an
+install that survives closing Firefox, the add-on has to be signed at
+[addons.mozilla.org](https://addons.mozilla.org/developers/) — not done yet.
 
 ## Using it
 
 Click the toolbar button.
 
-- **Font set** — four starter sets (System, Reading, Modern, High legibility).
-  Pick one and the three fields below fill in; edit any field and the set
-  becomes *Custom*.
-- **Text / Headings / Code** — type any font name, or choose from the list. The
-  list is measured against your machine, so fonts you actually have are shown
-  first, and a name you type that is not installed is marked. Leave a field
-  empty to let the site keep its own font there.
-- **Apply to** — *All sites* edits your defaults; switching to the site's name
-  saves fonts for that site alone.
-- **Turn off on this site** — for sites whose layout depends on their font.
+- **Font set** — four ready sets: System, Reading (serif), Modern (sans) and
+  High legibility. Pick one and the three fields below fill in; change any
+  field and the set becomes *Custom*.
+- **Text / Headings / Code** — type any font name, or pick from the list. The
+  list is measured against your own computer, so the fonts you actually have
+  come first, and a name you type that is not installed is marked. Leave a
+  field empty to let the site keep its own font there.
+- **Apply to** — *All sites* changes your defaults. Switch it to the site's
+  name and the fonts you set apply to that site alone.
+- **Turn off on this site** — for a site whose layout falls apart in another
+  font.
+- **Reset to defaults** — puts everything back, keeps your language.
 
-Changes apply immediately to open tabs; nothing needs reloading.
+Changes show up straight away in every open tab. Nothing to save, nothing to
+reload.
 
-### What it deliberately does not touch
+## Language
 
-Icon fonts. Font Awesome, Material Icons and their relatives draw pictures from
-private character slots, so forcing a text font on them turns every icon into
-an empty box. Elements whose class names look like icons keep the site's own
-font, as do `::before` / `::after` pseudo-elements, which is where most icon
-libraries put their glyphs.
+The panel is in English, Tajik and Uzbek. The selector sits in the top right of
+the panel; *Automatic* follows your browser's own language.
 
----
+## If a website looks wrong
 
-## The files
+- Icons are left alone on purpose. Font Awesome, Material Icons and the rest
+  draw little pictures out of a font, so putting a normal font on them turns
+  every icon into an empty box. Anything that looks like an icon keeps the
+  site's own font.
+- If a site still breaks, tick **Turn off on this site**. Everywhere else keeps
+  your fonts.
+- Something else wrong? [Open an issue](https://github.com/shahloabdullayeva/font-picker/issues).
+
+## Updating it
+
+Download the zip again, replace the old folder with the new one, then press the
+reload arrow on the extension's card in `chrome://extensions`. Your fonts and
+per-site settings are kept.
+
+## Uninstalling
+
+`chrome://extensions` → **Remove**. In Firefox it disappears on its own when
+you close the browser.
+
+## For anyone reading the code
 
 ```
 manifest.json         what the browser reads first
@@ -114,36 +115,16 @@ src/settings.js       the settings shape, defaults, and the four font sets
 src/content.js        injects the CSS into every page, at document_start
 src/popup.html/css/js the panel behind the toolbar button
 src/fonts.js          the font list, measured against this computer
-src/i18n.js           popup translations: en, tg, uz
+src/i18n.js           panel translations: en, tg, uz
 _locales/*/           extension name and description, per language
 test/check.js         checks that run without a browser
 package.py            zips the folder for a store upload
 ```
 
-## Adding a language
+`node test/check.js` runs twenty checks with no browser involved. `./package.py`
+writes `font-picker-<version>.zip` with the manifest at the root, which is the
+shape the Chrome, Edge and Firefox stores expect.
 
-1. Add a block to `src/i18n.js` with the same keys as `en`, and its code to `langs`.
-2. Add `_locales/<code>/messages.json` with `extName` and `extDesc`.
-3. `node test/check.js` — it fails if any string is missing from any language.
-
-## Tests
-
-```
-node test/check.js
-```
-
-Twenty checks with no browser involved: the manifest names only files that
-exist and only permissions the code uses, no language is missing a string the
-popup asks for, and the content script produces the right CSS — including that
-the icon-exclusion list sits inside `:where()`, without which the headings rule
-would lose to it on specificity.
-
-## Publishing
-
-`./package.py` writes `font-picker-<version>.zip` with the manifest at the root,
-which is the shape all three stores expect.
-
-- Chrome Web Store — one-time developer fee, review in days.
-- Edge Add-ons — free, accepts the same zip.
-- Firefox (addons.mozilla.org) — free, signs the add-on; this is also the only
-  way to install it permanently in release Firefox.
+To add a language: copy a block in `src/i18n.js`, keep the same keys, add its
+code to `langs`, and add `_locales/<code>/messages.json` with `extName` and
+`extDesc`. The checks fail if any string is missing anywhere.
