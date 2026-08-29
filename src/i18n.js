@@ -2,10 +2,9 @@ const I18N = {
   langs: [
     ['auto', 'Automatic'],
     ['en', 'English'],
-    ['tg', 'Тоҷикӣ'],
+    ['tg', 'Tojikcha (Ks)'],
     ['uz', 'O‘zbekcha'],
   ],
-
   en: {
     enabled: 'Font swapping on',
     applyTo: 'Apply to',
@@ -28,36 +27,34 @@ const I18N = {
     missing: 'not installed here',
     scopeAll: 'Your defaults, used on every site.',
     scopeSite: 'These fonts apply to {site} only.',
-    preview: 'The quick brown fox jumps over the lazy dog',
+    preview: 'All my mornings are mondays stuck in an endless February',
   },
-
   tg: {
-    enabled: 'Ивази шрифт фаъол аст',
-    applyTo: 'Татбиқ ба',
-    allSites: 'Ҳамаи сайтҳо',
-    fontSet: 'Маҷмӯи шрифтҳо',
-    p_system: 'Системавӣ',
-    p_reading: 'Барои хониш (серифдор)',
-    p_modern: 'Муосир (бе сериф)',
-    p_clear: 'Хониши осон',
-    p_custom: 'Дилхоҳ',
-    f_text: 'Матн',
-    f_headings: 'Сарлавҳаҳо',
-    f_code: 'Код',
-    unchanged: 'Тағйир дода нашавад',
-    offHere: 'Дар ин сайт хомӯш кардан',
-    reset: 'Ба ҳолати аввала баргардонидан',
-    language: 'Забон',
-    auto: 'Худкор',
-    hint: 'Номи ҳар шрифтро нависед ё аз рӯйхати насбшуда интихоб кунед.',
-    missing: 'насб нашудааст',
-    scopeAll: 'Танзимоти пешфарз — барои ҳамаи сайтҳо.',
-    scopeSite: 'Ин шрифтҳо танҳо барои {site} татбиқ мешаванд.',
-    preview: 'Дар шаҳри Душанбе китобфурӯшии нав кушода шуд',
+    enabled: 'Shrift o‘lish kadan dargiftigi',
+    applyTo: 'Kor kunondan',
+    allSites: 'Hamma saythova',
+    fontSet: 'Shriftho',
+    p_system: 'Tizim shriftash',
+    p_reading: 'Xondan uchun (serif)',
+    p_modern: 'Zamonaviy',
+    p_clear: 'Xub xonda mushudigi',
+    p_custom: 'Xudam tanla kadigi',
+    f_text: 'Matn',
+    f_headings: 'Sarlavhaho',
+    f_code: 'Kod',
+    unchanged: 'O‘lish nashavgud',
+    offHere: 'In saytanda kushtan',
+    reset: 'Standart holatva raftan',
+    language: 'Zabon',
+    auto: 'Avtomatik',
+    hint: 'Xoxtigi shrift nomasha navusid, tanla kunid',
+    missing: 'nasb nashudagi',
+    scopeAll: 'Hamma sayt uchun standart sozlamaho',
+    scopeSite: 'In shrift faqat {site} uchun kor kunonda mushud',
+    preview: 'Man mastu tu devona',
   },
-
   uz: {
-    enabled: 'Shrift almashtirish yoqilgan',
+    enabled: 'Shrift almashtirish yoniq',
     applyTo: 'Qo‘llash',
     allSites: 'Barcha saytlarga',
     fontSet: 'Shriftlar to‘plami',
@@ -78,16 +75,14 @@ const I18N = {
     missing: 'o‘rnatilmagan',
     scopeAll: 'Barcha saytlar uchun standart sozlamalar.',
     scopeSite: 'Bu shriftlar faqat {site} uchun qo‘llanadi.',
-    preview: 'Toshkent shahrida yangi kitob do‘koni ochildi',
+    preview: 'Ko‘zlarimning oqi sensan, qarosi ham.',
   },
-
   resolve(choice) {
     if (choice && choice !== 'auto' && this[choice]) return choice;
     const api = globalThis.browser ?? globalThis.chrome;
     const ui = (api.i18n?.getUILanguage?.() || navigator.language || 'en').slice(0, 2);
     return this[ui] ? ui : 'en';
   },
-
   t(lang, key, vars) {
     let s = (this[lang] || this.en)[key] ?? (this.en[key] ?? key);
     if (vars) for (const [k, v] of Object.entries(vars)) s = s.replace(`{${k}}`, v);
