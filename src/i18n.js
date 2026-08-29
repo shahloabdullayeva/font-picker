@@ -1,14 +1,3 @@
-/* Popup translations.
-
-   The browser picks the extension's own name and description from _locales/,
-   following the browser's UI language -- and no browser ships a Tajik or Uzbek
-   UI, so that alone would leave both readers in English. The popup therefore
-   carries its own translations and its own picker; 'auto' follows the browser
-   for anyone who does not care.
-
-   To add a language: add a block here with the same keys, add its code to
-   LANGS below, and add a _locales/<code>/messages.json for the store listing.
-*/
 const I18N = {
   langs: [
     ['auto', 'Automatic'],

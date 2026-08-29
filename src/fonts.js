@@ -1,12 +1,3 @@
-/* The font list the popup offers.
-
-   No browser will hand an extension the real list of installed fonts in a way
-   that works everywhere (chrome.fontSettings is Chrome/Edge only, and the
-   Local Font Access API needs a permission prompt), so this is a curated list
-   measured against the machine: draw a test string in the candidate font and
-   see whether its width differs from the generic fallback. If it does, the
-   font exists here. The user can always type a name that is not on the list.
-*/
 const FONTS = {
   groups: [
     ['sans', ['system-ui', 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial',
@@ -23,7 +14,6 @@ const FONTS = {
   ],
 
   installed(name) {
-    // Generic names always resolve to something, so never mark them missing.
     if (FS.GENERIC.test(name)) return true;
     const probe = 'mmmmmmmmmmlliWWWQ@#';
     const ctx = document.createElement('canvas').getContext('2d');
@@ -39,8 +29,6 @@ const FONTS = {
     return this.groups.flatMap(([, names]) => names);
   },
 
-  /* Everything the list knows about, each marked present or not, installed
-     ones first so the useful half of the list is at the top. */
   available() {
     const seen = new Set();
     const out = [];

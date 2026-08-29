@@ -1,9 +1,3 @@
-/* The panel behind the toolbar button.
-
-   Everything writes straight to storage; the content script is listening for
-   changes and restyles open tabs immediately, so there is no Save button and
-   no page reload.
-*/
 (async () => {
   const api = FS.api;
   const $ = (id) => document.getElementById(id);
@@ -15,11 +9,9 @@
 
   try {
     const [tab] = await api.tabs.query({ active: true, currentWindow: true });
-    // Browser-internal pages (chrome://, about:) carry no site to configure.
     if (tab && /^https?:/.test(tab.url || '')) host = new URL(tab.url).hostname;
-  } catch (e) { /* no activeTab access: stay on the all-sites view */ }
+  } catch (e) {}
 
-  /* Which font map the inputs are editing: the defaults, or this site's own. */
   const siteScope = () => host && $('scope').value === 'site';
 
   function currentFonts() {
@@ -81,8 +73,6 @@
     }
   }
 
-  // ---- wiring -----------------------------------------------------------
-
   for (const [code, label] of I18N.langs) {
     const opt = document.createElement('option');
     opt.value = code;
@@ -127,7 +117,6 @@
   for (const f of FIELDS) {
     $(`f-${f}`).addEventListener('change', async () => {
       setFonts({ [f]: $(`f-${f}`).value.trim() });
-      // Once a field is edited by hand it is no longer one of the sets.
       if (!siteScope()) settings.preset = 'custom';
       $('preset').value = settings.preset;
       await commit();

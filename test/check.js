@@ -1,7 +1,3 @@
-/* Checks that can run without a browser: the manifest points at files that
-   exist, every popup string is translated into every language, and the content
-   script builds the CSS it is supposed to. Run with: node test/check.js
-*/
 const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
@@ -23,7 +19,6 @@ function assert(cond, msg) {
   if (!cond) throw new Error(msg);
 }
 
-// ---------------------------------------------------------------- manifest
 console.log('manifest');
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'manifest.json'), 'utf8'));
 
@@ -54,10 +49,7 @@ check('asks for no permission it does not use', () => {
   }
 });
 
-// -------------------------------------------------------------------- i18n
 console.log('\ntranslations');
-// Browsers share one lexical scope across a page's scripts; node's vm gives
-// each run its own, so hand the value out explicitly.
 const ctx = { console, navigator: { language: 'en' }, chrome: {} };
 ctx.globalThis = ctx;
 vm.createContext(ctx);
@@ -105,7 +97,6 @@ check('_locales matches the popup languages', () => {
   }
 });
 
-// ---------------------------------------------------- the content script CSS
 console.log('\nfont rules');
 
 function runContentScript(settings, url = 'https://example.com/page', topUrl = url) {
@@ -124,8 +115,6 @@ function runContentScript(settings, url = 'https://example.com/page', topUrl = u
       head: null,
       addEventListener() {},
     },
-    // A cross-origin frame cannot read the top document's URL: the getter
-    // throws, exactly as the browser does.
     window: {
       top: {
         location: {
@@ -147,8 +136,6 @@ function runContentScript(settings, url = 'https://example.com/page', topUrl = u
   };
   sandbox.globalThis = sandbox;
   vm.createContext(sandbox);
-  // One script, the way the browser loads a content script's files: they share
-  // a scope, so content.js can see the FS that settings.js declared.
   vm.runInContext([
     fs.readFileSync(path.join(ROOT, 'src/settings.js'), 'utf8'),
     fs.readFileSync(path.join(ROOT, 'src/content.js'), 'utf8'),

@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""Zip the extension for a store upload (or for someone to install by hand).
-
-Stores want the manifest at the top level of the archive, not inside a folder,
-which is why this zips the contents rather than the directory. Development
-files are left out.
-
-    ./package.py            -> font-picker-<version>.zip
-"""
 import json
 import os
 import zipfile
