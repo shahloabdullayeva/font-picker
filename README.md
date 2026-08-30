@@ -1,8 +1,6 @@
 # Font Picker
 
-Change the font on any website. Pick your fonts once and every page you open
-uses them, or set different fonts for one site that needs it. Works in Chrome,
-Edge and Firefox. Panel in English, Tajik and Uzbek.
+Change the font on any website.
 
 **[⬇ Download Font Picker](https://github.com/shahloabdullayeva/font-picker/archive/refs/heads/main.zip)** — then follow [Install](#install) below.
 
